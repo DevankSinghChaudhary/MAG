@@ -1,8 +1,8 @@
-# MAG (Monetisation Audit Generator)
+# **MAG** (Monetisation Audit Generator)
 
 This is monetisation audit generator work via "NVIDIA_API" (can work with any ai api). Generate audit based on creator's bio, captions.
 
-[![Instagram](https://img.shields.io/badge/Owner-Follow-E4405F?logo=instagram&logoColor=white)](https://instagram.com/devanksinghchaudhary)
+[![Instagram](https://img.shields.io/badge/Owner-Follow-00000?logo=instagram&logoColor=white)](https://instagram.com/devanksinghchaudhary)
 
 # 🔍 MAG (v1.0)
 
@@ -17,26 +17,30 @@ This is monetisation audit generator work via "NVIDIA_API" (can work with any ai
 - Requests / OpenAI
 - python-dotenv
 
-## Installation
+# **Installation**
 
-### 1. Clone the repo
+## 1. Clone the repo
 ```bash
 git clone https://github.com/devanksinghchaudhary/mag.git
 cd mag
+```
 
-### 2. Create virtual environment (python/optional)
+## 2. Create virtual environment (python/optional)
 ```bash
 python -m venv env
+```
 
-### 3. Avtivate virtual environment
+## 3. Avtivate virtual environment
 ### Windows(PowerShell):
 ```bash
 env\Scripts\activate
+```
 
 ### Mac/Linux
 ```bash
 source env/bin/activate
-
-### 3. Install the dependencies
+```
+## 3. Install the dependencies
 ```bash
 pip install -r requirements.txt
+```
