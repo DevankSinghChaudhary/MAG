@@ -12,11 +12,11 @@ This is monetisation audit generator work via "NVIDIA_API" (can work with any ai
 - more features comming...
 
 ## Potential Issues
-- ###AI API
+- ### AI API
     - ### Fix
-        > Go to: www.build.nvidia.com/
-        > Make nvidia account
-        > Generate Own API key for free, no limit except 40 requests/min (more than enough for single user)
+        - > Go to: www.build.nvidia.com/ 
+        - > Make nvidia account
+        - > Generate Own API key for free, no limit except 40 requests/min (more than enough for single user)
  
 ## Tech Stack
 - Python
