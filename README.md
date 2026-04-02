@@ -7,11 +7,17 @@ This is monetisation audit generator work via "NVIDIA_API" (can work with any ai
 # 🔍 MAG (v1.0)
 
 ## Features
-- Accepts user input (bio / text / raw data)
-- Processes and structures the data
-- Outputs clean JSON / formatted result
-- Uses environment variables for secure API usage
+- Accept bio and captions as input
+- fullly free
+- more features comming...
 
+## Potential Issues
+- AI API
+    ### Fix
+        - Go to: www.build.nvidia.com/
+        - Make nvidia account
+        - Generate Own API key for free, no limit except 40 requests/min (more than enough for single user)
+ 
 ## Tech Stack
 - Python
 - Requests / OpenAI
