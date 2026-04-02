@@ -6,3 +6,7 @@ This is monetisation audit generator work via "NVIDIA_API" (can work with any ai
 ----
 
 Run:
+```
+pip install
+python main.py
+```
