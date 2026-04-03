@@ -19,12 +19,13 @@ def call_analysis(prompt):
     )
     return completion.choices[0].message.content
 
-def new_model(prompt):
-  response = client.responses.create(
+def chunks_model(chunks_prompt):
+  completion = client.chat.completions.create(
     model="openai/gpt-oss-120b",
-    input=prompt,
-    max_output_tokens=4096,
-    top_p=1,
+    messages=[{"role":"user","content":chunks_prompt}],
     temperature=1,
+    top_p=1,
+    max_tokens=2000,
     stream=False
   )
+  return completion.choices[0].message.content

@@ -1,6 +1,4 @@
-import json
-
-def ask(): #INPUT ASKING
+def ask():
     while True:
         asking = input("Enter Bio: ").strip()
         if asking:
@@ -29,11 +27,12 @@ def ask(): #INPUT ASKING
             "caption": caption
             }
 
-def improved_json(ai_output): #FILTERING JSON
+def improved_output(ai_output): 
     start = ai_output.find("{")
     end = ai_output.rfind("}")
     end_output = ai_output[start:end+1]
     return end_output
 
-def json_making(chunks_data): #JSON MAKING FOR DATA CHUNKS
-    json.dumps(chunks_data)
+def cycle(count):
+    length = len(count)
+    return length
