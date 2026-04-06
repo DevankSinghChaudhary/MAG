@@ -1,3 +1,5 @@
+import asyncio
+
 def ask():
     while True:
         asking = input("Enter Bio: ").strip()
@@ -32,7 +34,3 @@ def improved_output(ai_output):
     end = ai_output.rfind("}")
     end_output = ai_output[start:end+1]
     return end_output
-
-def cycle(count):
-    length = len(count)
-    return length

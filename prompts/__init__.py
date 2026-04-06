@@ -1,1 +1,1 @@
-from .analysis_p import analysis_prompt, chunks
+from .analysis_p import analysis_prompt, chunks_prompt
