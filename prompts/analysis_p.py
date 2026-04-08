@@ -35,17 +35,14 @@ def chunks_prompt(chunks_data):
   if not chunks_data:
     raise ValueError("No chunks data for AI!")
   prompt = f"""
-  You are an expert data analysit for "INSTAGRAM INFULENCERS".
-  
-  Analyze this data and return only json format:
-  
+  Convert this into a professional report statement:
+
   {chunks_data}
 
-  Strictly follow these rules:
-  - Return ONLY valid JSON
-  - No explanations, no extra text
-  - Keep responses concise and practical
-  - Be specific, not generic
+    Make it:
+    - Clear
+    - Concise
+    - Professional tone
 
   JSON format:
   {{
@@ -56,6 +53,6 @@ def chunks_prompt(chunks_data):
   "digital_product_explaination": ""
   }}
 
-  return based on if data's thrid key is "monetization_gap" then return "monetization_gap_explanation" and if "digital_product" return "digital_product_explaination" 
+  return based on if data's key is "monetization_gap" then return "monetization_gap_explanation" and if "digital_product" return "digital_product_explaination" 
   """
   return prompt

@@ -35,5 +35,11 @@ async def run_all(chunks_data):
 
 if __name__ == "__main__":
     chunks_data = main()
+    print("##============================================================##")
+    print(chunks_data)
     results = asyncio.run(run_all(chunks_data))
+    print("##============================================================##")
     print(results)
+    print("##============================================================##")
+    print(len(chunks_data))
+    print(len(results))
