@@ -46,13 +46,55 @@ def chunks_prompt(chunks_data):
 
   JSON format:
   {{
-  "monetization_gap_explanation": ""
+    "monetization_gap_explanation": ""
   }}
   OR
   {{
-  "digital_product_explaination": ""
+    "digital_product_explaination": ""
   }}
 
   return based on if data's key is "monetization_gap" then return "monetization_gap_explanation" and if "digital_product" return "digital_product_explaination" 
+  """
+  return prompt
+
+def pdf_prompt(items):
+  if not items:
+    raise ValueError("No data for pdf creation!!")
+  prompt = f"""
+  YOU ARE PROFESSIONAL SENIOR DATA ANALYST
+  Convert this into professional report of the creator:
+
+  {items}
+
+  Your report will be used in the ADUIT.pdf directly, so make it like its talking to the creator itself.
+  Not static report.
+
+  Make it:
+    - Clear
+    - Professional Tone
+    - Talking to creator directly
+
+  JSON FORMAT YOU WILL DELIVER:
+  {{
+    "Gap_name": ""
+    "Observation": "",
+    "Impact": "",
+    "Recommendation": ""
+  }}
+
+
+  EXAMPLE OF TONE OF EACH VALUE:
+  Observation
+    The current monetization strategy relies heavily on one-time transactions, which limits long-term revenue stability and reduces customer lifetime value. There is no clear mechanism in place to retain users or generate predictable, recurring income.
+
+  Impact
+    This approach creates inconsistent revenue streams and increases dependency on continuous customer acquisition. Over time, this can lead to higher marketing costs and reduced overall profitability.
+
+  Recommendation
+    Introduce a recurring revenue model, such as a subscription-based offering or membership tier, that provides ongoing value to users. This could include exclusive content, premium features, or community access. Implementing such a model would improve revenue predictability and strengthen customer retention. 
+  
+  
+  NOTE: ABOVE IS JUST EXAMPLE, IT MUST NOT INFLUENCE REPORT DATA EXCEPT TONE.
+  Gap_name = Name of gap. e.g: Course Gap, Planner Gap, Content Gap etc 
   """
   return prompt

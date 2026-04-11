@@ -1,6 +1,7 @@
 import json
 import asyncio
 from chunks import chunks
+from pdf import resultpdf, txt
 from data import ask, improved_output
 from prompts import analysis_prompt, chunks_prompt
 from models import call_analysis, chunks_model
@@ -35,11 +36,10 @@ async def run_all(chunks_data):
 
 if __name__ == "__main__":
     chunks_data = main()
-    print("##============================================================##")
     print(chunks_data)
     results = asyncio.run(run_all(chunks_data))
-    print("##============================================================##")
-    print(results)
-    print("##============================================================##")
-    print(len(chunks_data))
-    print(len(results))
+    result_pdf = resultpdf(results)
+    print(result_pdf)
+    txt(result_pdf)
+
+    

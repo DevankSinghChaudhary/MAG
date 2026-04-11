@@ -29,3 +29,16 @@ def chunks_model(chunksPrompt):
     stream=False
   )
   return completion.choices[0].message.content
+
+
+def pdfCreation(pdfPrompt):
+  completion = client.chat.completions.create(
+    model="nvidia/nemotron-3-super-120b-a12b",
+    messages=[{"role":"user","content": pdfPrompt}],
+    temperature=0.5,
+    top_p=0.95,
+    max_tokens=10000,
+    extra_body={"chat_template_kwargs":{"enable_thinking":True},"reasoning_budget":10000},
+    stream=False
+  )
+  return completion.choices[0].message.content

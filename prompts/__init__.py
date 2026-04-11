@@ -1,1 +1,1 @@
-from .analysis_p import analysis_prompt, chunks_prompt
+from .analysis_p import analysis_prompt, chunks_prompt, pdf_prompt
