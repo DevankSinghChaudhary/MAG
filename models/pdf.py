@@ -11,7 +11,8 @@ client = OpenAI(
 def ai_pdf(pdfPrompt):
   completion = client.chat.completions.create(
     model="openai/gpt-oss-120b",
-    messages=[{"role":"user","content":pdfPrompt}],
+    messages=[{"role":"system","content":"Always Return JSON format without any additional formatting. No '\u2011' or any encoding"},
+              {"role":"user","content":pdfPrompt}],
     temperature=1,
     top_p=1,
     max_tokens=2000,

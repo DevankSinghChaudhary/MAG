@@ -1,10 +1,12 @@
 import json
 import asyncio
+from scripts import jinjaPdf
 from chunks import chunks
 from pdf import resultpdf, txt
 from data import ask, improved_output
 from prompts import analysis_prompt, chunks_prompt
 from models import call_analysis, chunks_model
+from weasyprint import HTML
 
 
 def main():
@@ -39,7 +41,7 @@ if __name__ == "__main__":
     print(chunks_data)
     results = asyncio.run(run_all(chunks_data))
     result_pdf = resultpdf(results)
-    print(result_pdf)
-    txt(result_pdf)
+    content = jinjaPdf(result_pdf)
+    HTML(string=content).write_pdf("Audit_Example.pdf")
 
     

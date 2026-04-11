@@ -1,0 +1,24 @@
+<html>
+<head>
+  <style>
+    body { font-family: Arial; }
+    h1 { color: #333; }
+  </style>
+</head>
+<body>
+
+<h1>Monetization Audit for {name}</h1>
+
+{% for gap in result %}
+  <h2>Gap: {{ gap.Gap_name }}</h2>
+  <p>{{ gap.observation }}</p>
+
+  <h2>Impact</h2>
+  <p>{{ gap.Impact }}</p>
+  
+  <h2>Recommendation</h2>
+  <p>{{ gap.Recommendation }}</p>
+{% endfor %}
+
+</body>
+</html>
