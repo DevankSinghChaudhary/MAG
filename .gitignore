@@ -1,10 +1,9 @@
 *.pyc
 *.pyo
+__pycache__/
 .*_cache
 wine-py2exe/
 py2exe.log
-build/
-dist/
 zip/
 tmp/
 venv/
