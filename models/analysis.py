@@ -10,8 +10,9 @@ client = OpenAI(
 )
 def call_analysis(prompt):
     completion = client.chat.completions.create(
-      model="deepseek-ai/deepseek-v3.2",
-      messages=[{"role":"user","content":prompt}],
+      model="openai/gpt-oss-120b",
+      messages=[{"role":"system","content":"DONT REPEATE ANY MONETISATION GAP/DIGITAL PRODUCT. Always Return JSON format without any additional formatting. No '\u2011' or any encoding. (NEVER GIVE ADVISE OF STARTING ANY KIND OF SAAS, NOT EVEN ONLINE WEB PORTAL OF ANY HABIT TRAKER ETC). Keep in mind this audit is mainly for outreaching influencer for monetising thier audience via digital products."},
+                {"role":"user","content":prompt}],
       temperature=1,
       top_p=0.95,
       max_tokens=2000,
@@ -22,7 +23,8 @@ def call_analysis(prompt):
 def chunks_model(chunksPrompt):
   completion = client.chat.completions.create(
     model="openai/gpt-oss-120b",
-    messages=[{"role":"user","content":chunksPrompt}],
+    messages=[{"role":"system","content":"DONT REPEATE ANY MONETISATION GAP/DIGITAL PRODUCT. Always Return JSON format without any additional formatting. No '\u2011' or any encoding. (NEVER GIVE ADVISE OF STARTING ANY KIND OF SAAS, NOT EVEN ONLINE WEB PORTAL OF ANY HABIT TRAKER ETC). Keep in mind this audit is mainly for outreaching influencer for monetising thier audience via digital products."},
+              {"role":"user","content":chunksPrompt}],
     temperature=1,
     top_p=1,
     max_tokens=2000,
@@ -33,8 +35,9 @@ def chunks_model(chunksPrompt):
 
 def pdfCreation(pdfPrompt):
   completion = client.chat.completions.create(
-    model="nvidia/nemotron-3-super-120b-a12b",
-    messages=[{"role":"user","content": pdfPrompt}],
+    model="openai/gpt-oss-120b",
+    messages=[{"role":"system","content":"DONT REPEATE ANY MONETISATION GAP/DIGITAL PRODUCT. Always Return JSON format without any additional formatting. No '\u2011' or any encoding. (NEVER GIVE ADVISE OF STARTING ANY KIND OF SAAS, NOT EVEN ONLINE WEB PORTAL OF ANY HABIT TRAKER ETC). Keep in mind this audit is mainly for outreaching influencer for monetising thier audience via digital products."},
+              {"role":"user","content": pdfPrompt}],
     temperature=0.5,
     top_p=0.95,
     max_tokens=10000,

@@ -1,18 +1,18 @@
 import json
 import asyncio
-from scripts import jinjaPdf
 from chunks import chunks
-from pdf import resultpdf, txt
+from pdf import resultpdf
+from pdf.reportlab_pdf import create_pdf
 from data import ask, improved_output
-from prompts import analysis_prompt, chunks_prompt
+from prompts import analysis_prompt, chunks_prompt, to_avoid_name, to_avoid, to_add, analyze
 from models import call_analysis, chunks_model
-from weasyprint import HTML
 
 
 def main():
     raw_data = ask()
+    structured_data = analyze(raw_data)
 
-    prompt = analysis_prompt(raw_data)
+    prompt = analysis_prompt(structured_data, to_avoid, to_avoid_name, to_add)
 
     ai_output = call_analysis(prompt)
 
@@ -20,7 +20,7 @@ def main():
     data = json.loads(output)
 
     chunks_data = chunks(data)
-    return chunks_data
+    return raw_data, chunks_data
     
 async def chunks_call(chunks_data):
     chunksPrompt = chunks_prompt(chunks_data)
@@ -37,11 +37,13 @@ async def run_all(chunks_data):
 
 
 if __name__ == "__main__":
-    chunks_data = main()
+    raw_data, chunks_data = main()
     print(chunks_data)
     results = asyncio.run(run_all(chunks_data))
     result_pdf = resultpdf(results)
-    content = jinjaPdf(result_pdf)
-    HTML(string=content).write_pdf("Audit_Example.pdf")
+    print(result_pdf)
+    name = raw_data["name"]
+    followers = raw_data.get("followers")
+    create_pdf(result_pdf, name, followers=followers)
 
     

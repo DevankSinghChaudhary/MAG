@@ -2,6 +2,16 @@ import asyncio
 
 def ask():
     while True:
+        name = input("Enter Name: ").strip()
+        if name:
+            break
+        print("Cannot be empty!")
+    while True:
+        f_n = int(input("Enter Followers: "))
+        if f_n:
+            break
+        print("Cannot be empty!")
+    while True:
         asking = input("Enter Bio: ").strip()
         if asking:
             break
@@ -25,6 +35,8 @@ def ask():
             caption.append(acaption)
             break
     return {
+            "name": name,
+            "followers": f_n,
             "bio": asking, 
             "caption": caption
             }

@@ -1,12 +1,62 @@
-def analysis_prompt(raw_data):
+def analyze(raw_data):
   if not raw_data:
+    raise ValueError("No raw data for AI!")
+  prompt = f"""
+    You are a precise social media business analyst.
+
+    Your task is to analyze a creator's bio and captions and extract structured business context.
+
+    ---
+
+    Return ONLY valid JSON with this exact structure:
+
+    {{
+      "niche": "...",
+      "target_audience": "...",
+      "monetization_type": "...",
+      "link_strategy": "...",
+      "content_type": "...",
+      "primary_goal": "..."
+    }}
+
+    ---
+
+    FIELD RULES:
+
+    - niche: 3-6 words describing domain
+    - target_audience: specific audience + intent
+    - monetization_type: choose ONE:
+      "affiliate-heavy", "digital-products", "brand-deals", "mixed", "none", "unknown"
+
+    - link_strategy: describe how links are used
+    - content_type: describe style of content
+    - primary_goal: main business goal
+
+    ---
+
+    STRICT RULES:
+
+    - Return ONLY JSON
+    - Use double quotes
+    - No extra text
+    - If unsure, use "unknown"
+    - Do NOT guess aggressively
+
+    ---
+    DATA:
+    {raw_data}
+    """
+  return prompt
+
+def analysis_prompt(structured_data, to_avoid, to_avoid_name, to_add):
+  if not structured_data:
     raise ValueError("No raw data for AI!")
   prompt = f"""
   You are an expert creator strategist.
 
   Analyze the following creator data and provide actionable insights:
 
-  {raw_data}
+  {structured_data}
 
   Strictly follow these rules:
   - Return ONLY valid JSON
@@ -14,6 +64,13 @@ def analysis_prompt(raw_data):
   - Keep responses concise and practical
   - Be specific, not generic
 
+  {to_avoid}
+
+
+  {to_avoid_name}
+
+  
+  {to_add}
   JSON format:
   {{
     "niche_clarity": "Evaluate how clear the niche is in 1-2 sentences",
@@ -74,6 +131,10 @@ def pdf_prompt(items):
     - Professional Tone
     - Talking to creator directly
 
+  Don't add but:
+    - "Gap" in gap name like: "Homeschool Curriculum Gap" < Wrong
+    - "Homeschool Curriculum" < Right
+
   JSON FORMAT YOU WILL DELIVER:
   {{
     "Gap_name": ""
@@ -93,6 +154,8 @@ def pdf_prompt(items):
   Recommendation
     Introduce a recurring revenue model, such as a subscription-based offering or membership tier, that provides ongoing value to users. This could include exclusive content, premium features, or community access. Implementing such a model would improve revenue predictability and strengthen customer retention. 
   
+    
+    MAKE OBSERVATION, IMPACT, RECOMMENDATION IMPACTFUL AND CONNECTING TO THEM.
   
   NOTE: ABOVE IS JUST EXAMPLE, IT MUST NOT INFLUENCE REPORT DATA EXCEPT TONE.
   Gap_name = Name of gap. e.g: Course Gap, Planner Gap, Content Gap etc 
