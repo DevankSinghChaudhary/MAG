@@ -156,3 +156,98 @@ def pdf_prompt(items):
   - No buzzwords, no fluff
   """
   return prompt
+
+
+def test_carousel_prompt(raw_data, structured_data, gaps_data):
+  if not raw_data or not structured_data or not gaps_data:
+    raise ValueError("No data for test carousel generation!")
+  
+  # Pick the first product idea to focus on
+  product_ideas = gaps_data.get("digital_product_ideas", [])
+  selected_product = product_ideas[0] if product_ideas else "Digital Course"
+  
+  prompt = f"""
+  You are an expert social media strategist creating a 7-day carousel content series for digital product promotion.
+
+  FOCUS PRODUCT: {selected_product}
+
+  Based on the creator's data, create a 7-day carousel workbook that tells a complete story around this ONE product. Structure it as:
+
+  DAYS 1-2: AUDIENCE DEMAND ANALYSIS
+  - Analyze what the audience really needs
+  - Build curiosity and desire
+  - No selling, just understanding their pain points
+
+  DAYS 3-5: FREE VALUE DELIVERY  
+  - Provide genuine value related to the product
+  - Show expertise and build trust
+  - Position yourself as the solution provider
+
+  DAYS 6-7: CONVERSION
+  - Present the product as the natural next step
+  - Create urgency and scarcity
+  - Guide them to purchase
+
+  Creator Data:
+  Raw Data: {raw_data}
+  Structured Data: {structured_data}
+  Gaps Data: {gaps_data}
+
+  REQUIREMENTS:
+  1. Focus ENTIRELY on the product: {selected_product}
+  2. Each day must have: focus, content_idea (slide breakdown), hook, call_to_action
+  3. Content should flow as a cohesive 7-day story
+  4. Use clean, professional language - no rich formatting like "48hour" or "15minute"
+  5. Make it conversational and engaging for PDF rendering
+
+  JSON FORMAT:
+  {{
+    "carousel_title": "Catchy title for the 7-day carousel series about {selected_product}",
+    "selected_product": "{selected_product}",
+    "day_1": {{
+      "focus": "Audience demand analysis objective",
+      "content_idea": "Detailed slide breakdown for carousel",
+      "hook": "Attention-grabbing opening line",
+      "call_to_action": "What to ask viewers to do"
+    }},
+    "day_2": {{
+      "focus": "Continue audience demand analysis",
+      "content_idea": "Detailed slide breakdown for carousel", 
+      "hook": "Attention-grabbing opening line",
+      "call_to_action": "What to ask viewers to do"
+    }},
+    "day_3": {{
+      "focus": "Start free value delivery",
+      "content_idea": "Detailed slide breakdown for carousel",
+      "hook": "Attention-grabbing opening line", 
+      "call_to_action": "What to ask viewers to do"
+    }},
+    "day_4": {{
+      "focus": "Continue free value delivery",
+      "content_idea": "Detailed slide breakdown for carousel",
+      "hook": "Attention-grabbing opening line",
+      "call_to_action": "What to ask viewers to do"
+    }},
+    "day_5": {{
+      "focus": "Peak free value delivery",
+      "content_idea": "Detailed slide breakdown for carousel",
+      "hook": "Attention-grabbing opening line",
+      "call_to_action": "What to ask viewers to do"
+    }},
+    "day_6": {{
+      "focus": "Begin conversion phase",
+      "content_idea": "Detailed slide breakdown for carousel",
+      "hook": "Attention-grabbing opening line",
+      "call_to_action": "What to ask viewers to do"
+    }},
+    "day_7": {{
+      "focus": "Final conversion push",
+      "content_idea": "Detailed slide breakdown for carousel",
+      "hook": "Attention-grabbing opening line",
+      "call_to_action": "What to ask viewers to do"
+    }}
+  }}
+
+  Return ONLY valid JSON with clean text. No special formatting or rich text.
+  """
+  return prompt

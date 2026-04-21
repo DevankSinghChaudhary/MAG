@@ -45,3 +45,16 @@ def pdfCreation(pdfPrompt):
     stream=False
   )
   return completion.choices[0].message.content
+
+
+def test_carousel_model(prompt):
+  completion = client.chat.completions.create(
+    model="openai/gpt-oss-120b",
+    messages=[{"role":"system","content":"You are an expert in creating engaging social media content strategies. Always return JSON format without any additional formatting. Focus on practical, step-by-step plans for content creation."},
+              {"role":"user","content":prompt}],
+    temperature=0.8,
+    top_p=0.95,
+    max_tokens=3000,
+    stream=False
+  )
+  return completion.choices[0].message.content

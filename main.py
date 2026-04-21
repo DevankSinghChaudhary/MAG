@@ -4,8 +4,8 @@ from chunks import chunks
 from pdf import resultpdf
 from pdf.reportlab_pdf import create_pdf
 from data import ask, improved_output
-from prompts import analysis_prompt, chunks_prompt, to_avoid_name, to_avoid, to_add, analyze
-from models import call_analysis, chunks_model
+from prompts import analysis_prompt, chunks_prompt, to_avoid_name, to_avoid, to_add, analyze, test_carousel_prompt
+from models import call_analysis, chunks_model, test_carousel_model
 
 
 def main():
@@ -20,7 +20,8 @@ def main():
     data = json.loads(output)
 
     chunks_data = chunks(data)
-    return raw_data, chunks_data
+    return raw_data, structured_data, data, chunks_data
+    return raw_data, structured_data, data, chunks_data
     
 async def chunks_call(chunks_data):
     chunksPrompt = chunks_prompt(chunks_data)
@@ -37,13 +38,20 @@ async def run_all(chunks_data):
 
 
 if __name__ == "__main__":
-    raw_data, chunks_data = main()
+    raw_data, structured_data, data, chunks_data = main()
     print(chunks_data)
     results = asyncio.run(run_all(chunks_data))
     result_pdf = resultpdf(results)
     print(result_pdf)
+    
+    # Generate test carousel
+    carousel_prompt = test_carousel_prompt(raw_data, structured_data, data)
+    carousel_output = test_carousel_model(carousel_prompt)
+    carousel_data = json.loads(improved_output(carousel_output))
+    print("Carousel data:", carousel_data)
+    
     name = raw_data["name"]
     followers = raw_data.get("followers")
-    create_pdf(result_pdf, name, followers=followers)
+    create_pdf(result_pdf, name, followers=followers, carousel_data=carousel_data)
 
     

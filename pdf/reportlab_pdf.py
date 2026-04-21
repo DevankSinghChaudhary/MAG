@@ -142,6 +142,82 @@ def _format_currency(value):
     return f"${value:,.0f}"
 
 
+class CarouselDayCard(Flowable):
+    def __init__(self, day_num, day_data, day_style, body_style):
+        super().__init__()
+        self.day_num = day_num
+        self.day_data = day_data or {}
+        self.day_style = day_style
+        self.body_style = body_style
+        self.card_padding = 12
+        self.corner_radius = 10
+        self.card_background = colors.HexColor("#FFFFFF")
+        self.card_border = colors.HexColor("#E5E7EB")
+        self.day_accent = colors.HexColor("#3B82F6")
+        self.day_background = colors.HexColor("#EFF6FF")
+        self.corner_radius_line = 0
+        self._table = None
+        self._inner_width = None
+
+    def _build_table(self, inner_width):
+        if self._table is not None and self._inner_width == inner_width:
+            return
+
+        focus = self.day_data.get("focus", "")
+        content_idea = self.day_data.get("content_idea", "")
+        hook = self.day_data.get("hook", "")
+        call_to_action = self.day_data.get("call_to_action", "")
+
+        rows = [
+            [Paragraph(f"<b>Day {self.day_num}: {focus}</b>", self.day_style)],
+            [Spacer(1, 4)],
+            [Paragraph(f"<b>Content Idea:</b><br/>{_format_text(content_idea)}", self.body_style)],
+            [Spacer(1, 3)],
+            [Paragraph(f"<b>Hook:</b><br/>{_format_text(hook)}", self.body_style)],
+            [Spacer(1, 3)],
+            [Paragraph(f"<b>CTA:</b><br/>{_format_text(call_to_action)}", self.body_style)],
+        ]
+
+        table = Table(
+            rows,
+            colWidths=[inner_width],
+            hAlign="LEFT",
+            splitByRow=0,
+        )
+        table.setStyle(
+            TableStyle(
+                [
+                    ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                    ("LEFTPADDING", (0, 0), (-1, -1), 10),
+                    ("RIGHTPADDING", (0, 0), (-1, -1), 10),
+                    ("TOPPADDING", (0, 0), (-1, -1), 6),
+                    ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+                    ("TOPPADDING", (0, 0), (-1, 0), 8),
+                    ("BOTTOMPADDING", (0, 0), (-1, 0), 6),
+                ]
+            )
+        )
+
+        self._table = table
+        self._inner_width = inner_width
+
+    def wrap(self, availWidth, availHeight):
+        inner_width = max(availWidth - (self.card_padding * 2), 100)
+        self._build_table(inner_width)
+        table_width, table_height = self._table.wrap(inner_width, availHeight)
+        self.width = table_width + (self.card_padding * 2)
+        self.height = table_height + (self.card_padding * 2)
+        return self.width, self.height
+
+    def draw(self):
+        self.canv.saveState()
+        self.canv.setFillColor(self.card_background)
+        self.canv.setStrokeColor(self.card_border)
+        self.canv.roundRect(0, 0, self.width, self.height, self.corner_radius, fill=1, stroke=1)
+        self._table.drawOn(self.canv, self.card_padding, self.card_padding)
+        self.canv.restoreState()
+
+
 class GapCard(Flowable):
     def __init__(self, gap, gap_name_style, body_style, impact_style, recommendation_style):
         super().__init__()
@@ -224,7 +300,7 @@ class GapCard(Flowable):
         self.canv.restoreState()
 
 
-def create_pdf(data, name, followers=None, output_file=None):
+def create_pdf(data, name, followers=None, output_file=None, carousel_data=None):
     if not data:
         raise ValueError("No data available for PDF generation!")
 
@@ -311,8 +387,14 @@ def create_pdf(data, name, followers=None, output_file=None):
         parent=body_style,
         textColor=colors.HexColor("#166534"),
     )
-
-    
+    carousel_style = ParagraphStyle(
+        "CarouselDay",
+        parent=styles["Heading3"],
+        fontName="Helvetica-Bold",
+        fontSize=10,
+        leading=13,
+        textColor=colors.HexColor("#3B82F6"),
+    )
     revenue_estimate = _estimate_revenue(followers)
 
     story = [
@@ -393,6 +475,33 @@ def create_pdf(data, name, followers=None, output_file=None):
             )
             story.append(Spacer(1, 14))
         story.append(GapCard(gap, gap_name_style, body_style, impact_style, recommendation_style))
+
+    # Add Test Carousel section
+    if carousel_data:
+        story.append(Spacer(1, 18))
+        story.append(Paragraph("Test Carousel: 7-Day Implementation Plan", section_style))
+        story.append(Spacer(1, 8))
+        
+        carousel_title = carousel_data.get("carousel_title", "7-Day Content Carousel Plan")
+        selected_product = carousel_data.get("selected_product", "Digital Product")
+        story.append(Paragraph(f"<b>Focus Product:</b> {_format_text(selected_product)}", body_style))
+        story.append(Paragraph(f"<b>Campaign Title:</b> {_format_text(carousel_title)}", body_style))
+        story.append(Spacer(1, 12))
+        
+        # Add strategy overview
+        story.append(Paragraph(
+            "<b>Strategy Overview:</b><br/>This 7-day carousel is designed to take your audience on a journey from problem awareness (Days 1-2), through value delivery (Days 3-5), to final conversion (Days 6-7). Each day builds on the previous one to create urgency and desire for your digital product.",
+            body_style
+        ))
+        story.append(Spacer(1, 12))
+        
+        for day in range(1, 8):
+            day_key = f"day_{day}"
+            if day_key in carousel_data:
+                day_data = carousel_data[day_key]
+                story.append(CarouselDayCard(day, day_data, carousel_style, body_style))
+                if day < 7:
+                    story.append(Spacer(1, 8))
 
     # Add help section at the end
     story.append(Spacer(1, 18))
