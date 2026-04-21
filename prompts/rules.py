@@ -1,20 +1,27 @@
-to_avoid = "AVOID THESE MONETISATION GAP AT ANY COST:" \
-"- ANY TYPE OF SAAS or DIGITAL PORTAL OR WEB APPLICATION." \
-"- DIGITAL COMMUNITY BUILDING." \
-"- AFFILIATE OR AMBASSADOR PROGRAMS." \
-"- SPONSORSHIPS." \
-"- GENERIC PRINTABLE TEMPLATE GAP"
+to_avoid = "AVOID AT ANY COST:\n" \
+"- SaaS, web applications, or software platforms\n" \
+"- Digital communities, memberships with ongoing moderation\n" \
+"- Affiliate or ambassador programs\n" \
+"- Sponsorships or brand deals\n" \
+"- Coaching/consulting (unless it's a structured, self-service course)\n" \
+"- Generic, vague product ideas\n" \
+"- Anything that requires ongoing active service delivery\n"
 
+to_avoid_name = "AVOID GENERIC OR VAGUE NAMES:\n" \
+"- Any name ending in 'Gap' (use the actual product name instead)\n" \
+"- Vague names like 'Recurring Revenue' or 'Content Gap'\n" \
+"- Names that don't clearly describe WHAT the product is\n" \
+"- Names that could apply to any creator in any niche\n" \
+"BE SPECIFIC: 'Email Course on Sales Psychology' is better than 'Course Gap'\n"
 
-to_avoid_name = "AVOID THESE TYPES OF NAME AT ANY COST:" \
-"- Printables Gap" \
-"- Recurring Revenue Gap" \
-"- Audio-Guided Prayer Retreat Gap" \
-"- On-Demand Archive Gap" \
-"- Affiliate & Ambassador Program Gap" \
-"" \
-"AVOID THESE TYPES OF NAMES OR RELATED, THESE ARE NAMES THAT CONVEY NOTHING BUT CONFUSE"
-
-
-to_add = "PREFER DIGITAL REAL PRODUCTS LIKE COURSE, PDF, BOOKS etc as DIGITAL PRODUCT, EVEN IF ONLY 2-3 CAN BE IDENTIFIED. " \
-"NO NEED OF ADDING 5-6 USELESS GAPS"
+to_add = "FOCUS ON REAL 'CREATE ONCE, SELL ANYTIME' DIGITAL PRODUCTS:\n" \
+"- Courses (structured, self-paced)\n" \
+"- Templates & Frameworks\n" \
+"- Ebooks, Guides, Workbooks\n" \
+"- Checklists, Swipe Files\n" \
+"- Video Libraries\n" \
+"- Printable Resources (workbooks, planners, etc.)\n" \
+"\n" \
+"QUALITY FIRST: 1-3 genuine, specific gaps are better than 5 forced ones. " \
+"If only one real opportunity exists for this creator, identify only ONE. " \
+"Don't pad the list. Better to be honest and actionable."

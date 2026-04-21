@@ -52,38 +52,36 @@ def analysis_prompt(structured_data, to_avoid, to_avoid_name, to_add):
   if not structured_data:
     raise ValueError("No raw data for AI!")
   prompt = f"""
-  You are an expert creator strategist.
+  You are an expert creator strategist specializing in "create once, sell anytime" digital products.
 
-  Analyze the following creator data and provide actionable insights:
+  Analyze the following creator data and identify ONLY the most critical, actionable monetization gaps:
 
   {structured_data}
 
-  Strictly follow these rules:
-  - Return ONLY valid JSON
-  - No explanations, no extra text
-  - Keep responses concise and practical
-  - Be specific, not generic
+  CRITICAL INSTRUCTIONS:
+
+  1. QUALITY OVER QUANTITY: Identify only 1-3 genuine monetization gaps. If only one real gap exists, return just one.
+  2. DIGITAL PRODUCTS ONLY: Focus exclusively on digital products (courses, templates, ebooks, workbooks, guides, frameworks).
+  3. AUTHENTIC GAPS: Each gap must reflect a real, specific opportunity - not forced or generic.
+  4. DIRECT CONVERSATION: When listing gaps/products, write as if speaking directly to this creator about THEIR specific situation.
 
   {to_avoid}
-
-
   {to_avoid_name}
-
-  
   {to_add}
-  JSON format:
+
+  JSON format (STRICT):
   {{
-    "niche_clarity": "Evaluate how clear the niche is in 1-2 sentences",
-    "target_audience": "Describe the ideal audience in 1-2 sentences",
+    "niche_clarity": "1-2 sentence evaluation of how clear their niche positioning is",
+    "target_audience": "1-2 sentence description of who they serve and what they need",
     "monetization_gaps": [
-      "List 3-5 specific missed monetization opportunities"
+      "Only 1-3 real gaps. Each should be specific to THIS creator's content and audience."
     ],
     "digital_product_ideas": [
-      "List 3-5 highly relevant product ideas tailored to this creator"
+      "Only 1-3 product ideas that match the gaps above. Each must feel natural to their audience."
     ]
   }}
 
-  Specifically all keys and values with double qoutes (""), not single qoute ('') 
+  Remember: Return ONLY valid JSON with double quotes. No explanations. No generic filler. No forcing 5 ideas if 2 are better.
   """
   return prompt
 
@@ -118,46 +116,43 @@ def pdf_prompt(items):
   if not items:
     raise ValueError("No data for pdf creation!!")
   prompt = f"""
-  YOU ARE PROFESSIONAL SENIOR DATA ANALYST
-  Convert this into professional report of the creator:
+  You are a strategic advisor writing directly to a creator about their business opportunities.
 
+  Data to convert:
   {items}
 
-  Your report will be used in the ADUIT.pdf directly, so make it like its talking to the creator itself.
-  Not static report.
+  INSTRUCTIONS (READ CAREFULLY):
 
-  Make it:
-    - Clear
-    - Professional Tone
-    - Talking to creator directly
+  1. CONVERSATIONAL TONE: Write as if you're having a genuine conversation with this specific creator.
+  2. NO GENERIC LANGUAGE: Every sentence should feel personalized to their niche, audience, and current approach.
+  3. HONEST ASSESSMENT: Be direct and authentic. If it's a real gap, explain it clearly. Don't overcomplicate.
+  4. ACTIONABLE: Each recommendation should be concrete and implementable for THEIR situation specifically.
+  5. NAME FORMAT: No word "Gap" in the name. Use the actual product/opportunity name (e.g., "Email Course", "Templates Library", not "Email Course Gap").
 
-  Don't add but:
-    - "Gap" in gap name like: "Homeschool Curriculum Gap" < Wrong
-    - "Homeschool Curriculum" < Right
+  TONE EXAMPLES:
 
-  JSON FORMAT YOU WILL DELIVER:
+  Observation (What's missing):
+    You're creating amazing [content type], but your audience has no way to go deeper beyond free content. Right now, they engage, then disappear.
+
+  Impact (Why it matters):
+    This means you're leaving money on the table while your engaged audience is actively looking for the next step. Every person who could become a customer instead just scrolls past.
+
+  Recommendation (What to do):
+    Create a [specific product type] that takes your [specific content theme] to the next level. Price it at [realistic range], and promote it to your most engaged followers. This single product could generate [realistic revenue impact].
+
+  JSON FORMAT:
   {{
-    "Gap_name": ""
-    "Observation": "",
-    "Impact": "",
-    "Recommendation": ""
+    "Gap_name": "Name of the digital product/opportunity (no 'Gap' word)",
+    "Observation": "What's missing from their current approach (talking directly to them)",
+    "Impact": "Why this matters specifically for their business and audience",
+    "Recommendation": "Concrete, specific action they can take (mention the product, audience segment, pricing approach)"
   }}
 
-
-  EXAMPLE OF TONE OF EACH VALUE:
-  Observation
-    The current monetization strategy relies heavily on one-time transactions, which limits long-term revenue stability and reduces customer lifetime value. There is no clear mechanism in place to retain users or generate predictable, recurring income.
-
-  Impact
-    This approach creates inconsistent revenue streams and increases dependency on continuous customer acquisition. Over time, this can lead to higher marketing costs and reduced overall profitability.
-
-  Recommendation
-    Introduce a recurring revenue model, such as a subscription-based offering or membership tier, that provides ongoing value to users. This could include exclusive content, premium features, or community access. Implementing such a model would improve revenue predictability and strengthen customer retention. 
-  
-    
-    MAKE OBSERVATION, IMPACT, RECOMMENDATION IMPACTFUL AND CONNECTING TO THEM.
-  
-  NOTE: ABOVE IS JUST EXAMPLE, IT MUST NOT INFLUENCE REPORT DATA EXCEPT TONE.
-  Gap_name = Name of gap. e.g: Course Gap, Planner Gap, Content Gap etc 
+  RULES:
+  - Return ONLY valid JSON
+  - Use double quotes only
+  - Be specific to THIS creator, not generic
+  - Make it feel like real advice from someone who understands their business
+  - No buzzwords, no fluff
   """
   return prompt

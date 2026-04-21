@@ -337,7 +337,8 @@ def create_pdf(data, name, followers=None, output_file=None):
                 Paragraph(
                     (
                         f"Based on {followers_text} followers, a 1-2% conversion on a $79-$99 offer "
-                        f"suggests an estimated revenue range of <b>{revenue_range_text}</b>."
+                        f"suggests an estimated revenue range of <b>{revenue_range_text}</b>. "
+                        f"See below for how I can help you achieve this potential."
                     ),
                     revenue_body_style,
                 )
@@ -392,6 +393,16 @@ def create_pdf(data, name, followers=None, output_file=None):
             )
             story.append(Spacer(1, 14))
         story.append(GapCard(gap, gap_name_style, body_style, impact_style, recommendation_style))
+
+    # Add help section at the end
+    story.append(Spacer(1, 18))
+    story.append(Paragraph("How I Can Help You Achieve This Revenue Potential", section_style))
+    story.append(Spacer(1, 5))
+    story.append(Paragraph(
+        "I'll personally manage your digital product creation from start to finish, ensuring it aligns perfectly with your audience's needs and your expertise. You'll get daily guidance on what to focus on - from content creation to promotion strategies that don't rely on paid ads. Together, we'll build a sustainable business that turns your knowledge into consistent revenue.",
+        body_style
+    ))
+    story.append(Spacer(1, 12))
 
 
     doc.build(story)
