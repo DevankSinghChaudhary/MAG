@@ -11,7 +11,7 @@ client = OpenAI(
 def call_analysis(prompt):
     completion = client.chat.completions.create(
       model="openai/gpt-oss-120b",
-      messages=[{"role":"system","content":"DONT REPEATE ANY MONETISATION GAP/DIGITAL PRODUCT. Always Return JSON format without any additional formatting. No '\u2011' or any encoding. (NEVER GIVE ADVISE OF STARTING ANY KIND OF SAAS, NOT EVEN ONLINE WEB PORTAL OF ANY HABIT TRAKER ETC). Keep in mind this audit is mainly for outreaching influencer for monetising thier audience via digital products."},
+      messages=[{"role":"system","content":"DONT REPEATE ANY MONETISATION GAP/DIGITAL PRODUCT. Always Return JSON format without any additional formatting. No '\u2011' or any encoding. (NEVER GIVE ADVISE OF STARTING ANY KIND OF SAAS, NOT EVEN ONLINE WEB PORTAL OF ANY HABIT TRAKER ETC). CRITICAL: Only suggest creator-owned DIGITAL products. NEVER physical products, merchandise, tangible goods, or affiliate/reseller opportunities. Keep in mind this audit is mainly for outreaching influencer for monetising thier audience via creator-owned digital products."},
                 {"role":"user","content":prompt}],
       temperature=1,
       top_p=0.95,
@@ -23,7 +23,7 @@ def call_analysis(prompt):
 def chunks_model(chunksPrompt):
   completion = client.chat.completions.create(
     model="openai/gpt-oss-120b",
-    messages=[{"role":"system","content":"DONT REPEATE ANY MONETISATION GAP/DIGITAL PRODUCT. Always Return JSON format without any additional formatting. No '\u2011' or any encoding. (NEVER GIVE ADVISE OF STARTING ANY KIND OF SAAS, NOT EVEN ONLINE WEB PORTAL OF ANY HABIT TRAKER ETC). Keep in mind this audit is mainly for outreaching influencer for monetising thier audience via digital products."},
+    messages=[{"role":"system","content":"DONT REPEATE ANY MONETISATION GAP/DIGITAL PRODUCT. Always Return JSON format without any additional formatting. No '\u2011' or any encoding. (NEVER GIVE ADVISE OF STARTING ANY KIND OF SAAS, NOT EVEN ONLINE WEB PORTAL OF ANY HABIT TRAKER ETC). CRITICAL: Only suggest creator-owned DIGITAL products. NEVER physical products, merchandise, tangible goods, or affiliate/reseller opportunities. Keep in mind this audit is mainly for outreaching influencer for monetising thier audience via creator-owned digital products."},
               {"role":"user","content":chunksPrompt}],
     temperature=1,
     top_p=1,
@@ -36,7 +36,7 @@ def chunks_model(chunksPrompt):
 def pdfCreation(pdfPrompt):
   completion = client.chat.completions.create(
     model="openai/gpt-oss-120b",
-    messages=[{"role":"system","content":"DONT REPEATE ANY MONETISATION GAP/DIGITAL PRODUCT. Always Return JSON format without any additional formatting. No '\u2011' or any encoding. (NEVER GIVE ADVISE OF STARTING ANY KIND OF SAAS, NOT EVEN ONLINE WEB PORTAL OF ANY HABIT TRAKER ETC). Keep in mind this audit is mainly for outreaching influencer for monetising thier audience via digital products."},
+    messages=[{"role":"system","content":"DONT REPEATE ANY MONETISATION GAP/DIGITAL PRODUCT. Always Return JSON format without any additional formatting. No '\u2011' or any encoding. (NEVER GIVE ADVISE OF STARTING ANY KIND OF SAAS, NOT EVEN ONLINE WEB PORTAL OF ANY HABIT TRAKER ETC). CRITICAL: Only recommend creator-owned DIGITAL products. NEVER physical products, merchandise, tangible goods, or affiliate/reseller opportunities. Keep in mind this audit is mainly for outreaching influencer for monetising thier audience via creator-owned digital products."},
               {"role":"user","content": pdfPrompt}],
     temperature=0.5,
     top_p=0.95,
@@ -50,7 +50,7 @@ def pdfCreation(pdfPrompt):
 def test_carousel_model(prompt):
   completion = client.chat.completions.create(
     model="openai/gpt-oss-120b",
-    messages=[{"role":"system","content":"You are an expert in creating engaging social media content strategies. Always return JSON format without any additional formatting. Focus on practical, step-by-step plans for content creation."},
+    messages=[{"role":"system","content":"You are an expert in creating engaging social media content strategies. Always return JSON format without any additional formatting. Focus on practical, step-by-step plans for content creation. CRITICAL: The 7-day carousel must be for a creator-owned DIGITAL product ONLY. NEVER create content for physical products, merchandise, or affiliate/reseller opportunities."},
               {"role":"user","content":prompt}],
     temperature=0.8,
     top_p=0.95,

@@ -62,8 +62,10 @@ def analysis_prompt(structured_data, to_avoid, to_avoid_name, to_add):
 
   1. QUALITY OVER QUANTITY: Identify only 1-3 genuine monetization gaps. If only one real gap exists, return just one.
   2. DIGITAL PRODUCTS ONLY: Focus exclusively on digital products (courses, templates, ebooks, workbooks, guides, frameworks).
-  3. AUTHENTIC GAPS: Each gap must reflect a real, specific opportunity - not forced or generic.
-  4. DIRECT CONVERSATION: When listing gaps/products, write as if speaking directly to this creator about THEIR specific situation.
+  3. NO PHYSICAL PRODUCTS: Never suggest or include physical products, merchandise, or tangible goods.
+  4. NO AFFILIATE PRODUCTS: Do NOT suggest existing affiliate products they use. Do NOT suggest ANY new affiliate products or promotions. Only creator-owned digital products.
+  5. AUTHENTIC GAPS: Each gap must reflect a real, specific opportunity - not forced or generic.
+  6. DIRECT CONVERSATION: When listing gaps/products, write as if speaking directly to this creator about THEIR specific situation.
 
   {to_avoid}
   {to_avoid_name}
@@ -77,11 +79,11 @@ def analysis_prompt(structured_data, to_avoid, to_avoid_name, to_add):
       "Only 1-3 real gaps. Each should be specific to THIS creator's content and audience."
     ],
     "digital_product_ideas": [
-      "Only 1-3 product ideas that match the gaps above. Each must feel natural to their audience."
+      "Only 1-3 creator-owned digital product ideas. NO physical products. NO affiliate products. Each must feel natural to their audience."
     ]
   }}
 
-  Remember: Return ONLY valid JSON with double quotes. No explanations. No generic filler. No forcing 5 ideas if 2 are better.
+  Remember: Return ONLY valid JSON with double quotes. No explanations. No generic filler. No forcing 5 ideas if 2 are better. CRITICAL: Every digital product must be creator-owned content, NOT affiliate or reseller products, and NEVER physical goods.
   """
   return prompt
 
@@ -128,6 +130,8 @@ def pdf_prompt(items):
   3. HONEST ASSESSMENT: Be direct and authentic. If it's a real gap, explain it clearly. Don't overcomplicate.
   4. ACTIONABLE: Each recommendation should be concrete and implementable for THEIR situation specifically.
   5. NAME FORMAT: No word "Gap" in the name. Use the actual product/opportunity name (e.g., "Email Course", "Templates Library", not "Email Course Gap").
+  6. NO PHYSICAL PRODUCTS: Never recommend physical products, merchandise, or tangible goods.
+  7. NO AFFILIATE PRODUCTS: Never recommend affiliate products or reseller opportunities. Only creator-owned digital products.
 
   TONE EXAMPLES:
 
@@ -154,6 +158,8 @@ def pdf_prompt(items):
   - Be specific to THIS creator, not generic
   - Make it feel like real advice from someone who understands their business
   - No buzzwords, no fluff
+  - The recommended product must be a creator-owned digital product (course, template, guide, etc.)
+  - Never recommend physical products or affiliate/reseller opportunities
   """
   return prompt
 
@@ -199,6 +205,7 @@ def test_carousel_prompt(raw_data, structured_data, gaps_data):
   3. Content should flow as a cohesive 7-day story
   4. Use clean, professional language - no rich formatting like "48hour" or "15minute"
   5. Make it conversational and engaging for PDF rendering
+  6. The product must be a creator-owned digital product - NO physical products, NO affiliate products
 
   JSON FORMAT:
   {{
