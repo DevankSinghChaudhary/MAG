@@ -2,6 +2,7 @@ import streamlit as st
 import json
 import asyncio
 import os
+import logging
 from chunks import chunks
 from pdf.reportlab_pdf import create_pdf
 from data import improved_output
@@ -14,6 +15,27 @@ if "NVIDIA_API_KEY" not in os.environ:
 
 if "NVIDIA_API_KEY2" not in os.environ:
     st.warning("NVIDIA_API_KEY2 not found in environment variables. Please set it in Streamlit secrets.")
+
+# Function to parse AI results and convert them to dictionaries
+def parse_ai_results(results):
+    parsed_results = []
+    for item in results:
+        try:
+            # Clean the output using improved_output function
+            cleaned_item = improved_output(item)
+            # Parse the JSON string to a dictionary
+            parsed_item = json.loads(cleaned_item)
+            # Append the parsed dictionary to the results list
+            parsed_results.append(parsed_item)
+        except json.JSONDecodeError as e:
+            # Log the error and skip the item if parsing fails
+            logging.error(f"JSON parsing failed for item: {item}. Error: {str(e)}")
+            continue
+        except Exception as e:
+            # Log any other error and skip the item
+            logging.error(f"Error processing item: {item}. Error: {str(e)}")
+            continue
+    return parsed_results
 
 # Simple password protection
 def check_password():
@@ -170,6 +192,9 @@ if st.button("Generate Report"):
 
                 # Run the pipeline
                 results, data, carousel_data = run_pipeline(name, bio, captions)
+                
+                # Parse the AI results to ensure they are dictionaries
+                parsed_results = parse_ai_results(results)
 
                 # Generate PDF
                 output_dir = "output"
@@ -178,7 +203,7 @@ if st.button("Generate Report"):
 
                 output_file_path = os.path.join(output_dir, f"{name}_audit.pdf")
                 try:
-                    create_pdf(results, name, carousel_data=carousel_data, output_file=output_file_path)
+                    create_pdf(parsed_results, name, carousel_data=carousel_data, output_file=output_file_path)
 
                     st.success("Report generated successfully!")
                     with open(output_file_path, 'rb') as file:
