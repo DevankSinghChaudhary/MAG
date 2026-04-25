@@ -66,6 +66,16 @@ def analysis_prompt(structured_data, to_avoid, to_avoid_name, to_add):
   4. NO AFFILIATE PRODUCTS: Do NOT suggest existing affiliate products they use. Do NOT suggest ANY new affiliate products or promotions. Only creator-owned digital products.
   5. AUTHENTIC GAPS: Each gap must reflect a real, specific opportunity - not forced or generic.
   6. DIRECT CONVERSATION: When listing gaps/products, write as if speaking directly to this creator about THEIR specific situation.
+  7. NO DUPLICATE CATEGORIES: Ensure digital product ideas are distinct and non-overlapping. For example, if "Video Course" is suggested, do not also suggest "Course" as they are in the same category. Each idea should be in a unique product category.
+  8. SPECIFIC PRODUCT CATEGORIES: Focus on distinct digital product categories:
+     - Courses (comprehensive educational programs)
+     - Templates & Frameworks (structured tools and systems)
+     - Ebooks & Guides (informational content)
+     - Workbooks & Planners (interactive, application-focused)
+     - Video Libraries (collections of video content)
+     - Checklists & Swipe Files (quick reference tools)
+     - Digital Communities (if applicable within guidelines)
+  9. UNIQUE VALUE PROPOSITIONS: Each product idea should serve a different audience need or solve a different problem.
 
   {to_avoid}
   {to_avoid_name}
@@ -79,11 +89,11 @@ def analysis_prompt(structured_data, to_avoid, to_avoid_name, to_add):
       "Only 1-3 real gaps. Each should be specific to THIS creator's content and audience."
     ],
     "digital_product_ideas": [
-      "Only 1-3 creator-owned digital product ideas. NO physical products. NO affiliate products. Each must feel natural to their audience."
+      "Only 1-3 creator-owned digital product ideas. NO physical products. NO affiliate products. Each must be in a distinct category and feel natural to their audience."
     ]
   }}
 
-  Remember: Return ONLY valid JSON with double quotes. No explanations. No generic filler. No forcing 5 ideas if 2 are better. CRITICAL: Every digital product must be creator-owned content, NOT affiliate or reseller products, and NEVER physical goods.
+  Remember: Return ONLY valid JSON with double quotes. No explanations. No generic filler. No forcing 5 ideas if 2 are better. CRITICAL: Every digital product must be creator-owned content, NOT affiliate or reseller products, and NEVER physical goods. Ensure each product idea is in a distinct category to avoid overlap.
   """
   return prompt
 
@@ -132,6 +142,7 @@ def pdf_prompt(items):
   5. NAME FORMAT: No word "Gap" in the name. Use the actual product/opportunity name (e.g., "Email Course", "Templates Library", not "Email Course Gap").
   6. NO PHYSICAL PRODUCTS: Never recommend physical products, merchandise, or tangible goods.
   7. NO AFFILIATE PRODUCTS: Never recommend affiliate products or reseller opportunities. Only creator-owned digital products.
+  8. NO DUPLICATE CATEGORIES: Ensure that if one product is a "Course", do not suggest another product that is essentially the same category. Each product should be in a distinct category.
 
   TONE EXAMPLES:
 
@@ -160,6 +171,7 @@ def pdf_prompt(items):
   - No buzzwords, no fluff
   - The recommended product must be a creator-owned digital product (course, template, guide, etc.)
   - Never recommend physical products or affiliate/reseller opportunities
+  - Ensure each product idea is in a distinct category to avoid overlap
   """
   return prompt
 

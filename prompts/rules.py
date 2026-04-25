@@ -16,12 +16,15 @@ to_avoid_name = "AVOID GENERIC OR VAGUE NAMES:\n" \
 
 to_add = "FOCUS ON REAL 'CREATE ONCE, SELL ANYTIME' DIGITAL PRODUCTS:\n" \
 "- Courses (structured, self-paced)\n" \
-"- Templates & Frameworks\n" \
-"- Ebooks, Guides, Workbooks\n" \
-"- Checklists, Swipe Files\n" \
-"- Video Libraries\n" \
+"- Templates & Frameworks (structured tools and systems)\n" \
+"- Ebooks, Guides, Workbooks (informational content)\n" \
+"- Checklists, Swipe Files (quick reference tools)\n" \
+"- Video Libraries (collections of video content)\n" \
 "- Printable Resources (workbooks, planners, etc.)\n" \
 "\n" \
 "QUALITY FIRST: 1-3 genuine, specific gaps are better than 5 forced ones. " \
 "If only one real opportunity exists for this creator, identify only ONE. " \
-"Don't pad the list. Better to be honest and actionable."
+"Don't pad the list. Better to be honest and actionable.\n" \
+"ENSURE DISTINCT CATEGORIES: Each digital product idea must be in a unique category. " \
+"For example, if suggesting 'Video Course', do not also suggest 'Course' as they are in the same category. " \
+"Each idea should address a different audience need or solve a different problem."

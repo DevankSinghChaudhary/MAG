@@ -198,8 +198,8 @@ class GapCard(Flowable):
                     ("RIGHTPADDING", (0, 3), (-1, 3), 0),
                     ("TOPPADDING", (0, 3), (-1, 3), 0),
                     ("BOTTOMPADDING", (0, 3), (-1, 3), 0),
-                    ("LINEBEFORE", (0, 2), (0, 2), 4, self.impact_accent, self.corner_radius_line),
-                    ("LINEBEFORE", (0, 4), (0, 4), 4, self.recommendation_accent, self.corner_radius_line),
+                    ("LINEBEFORE", (0, 2), (0, 2), 2, self.impact_accent, self.corner_radius_line),
+                    ("LINEBEFORE", (0, 4), (0, 4), 2, self.recommendation_accent, self.corner_radius_line),
                 ]
             )
         )
@@ -218,8 +218,8 @@ class GapCard(Flowable):
     def draw(self):
         self.canv.saveState()
         self.canv.setFillColor(self.card_background)
-        self.canv.setStrokeColor(self.card_border)
-        self.canv.roundRect(0, 0, self.width, self.height, self.corner_radius, fill=1, stroke=1)
+        # No border: draw only fill
+        self.canv.roundRect(0, 0, self.width, self.height, self.corner_radius, fill=1, stroke=0)
         self._table.drawOn(self.canv, self.card_padding, self.card_padding)
         self.canv.restoreState()
 
@@ -342,9 +342,7 @@ def create_pdf(data, name, followers=None, output_file=None, carousel_data=None)
             [
                 Paragraph(
                     (
-                        f"Based on {followers_text} followers, a 1-2% conversion on a $79-$99 offer "
-                        f"suggests an estimated revenue range of <b>{revenue_range_text}</b>. "
-                        f"See below for how I can help you achieve this potential."
+                        f"Based on {followers_text} followers, a 1-2% conversion on a $79-$99 offer suggests an estimated revenue range of <b>{revenue_range_text}</b>."
                     ),
                     revenue_body_style,
                 )
@@ -379,6 +377,7 @@ def create_pdf(data, name, followers=None, output_file=None, carousel_data=None)
                 ]
             )
         )
+        story.append(Paragraph("I analyzed your recent posts and here what it say:", body_style))
 
     story.extend([
         Paragraph("Monetization Gaps Identified", section_style),
